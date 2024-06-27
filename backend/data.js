@@ -420,20 +420,6 @@ const data = {
       },
     },
     {
-      title: "Cute, Premium Brooch",
-      price: 14.0,
-      description: "Just a cute one. fits for you, fo' sure.",
-      category: "Jewelery",
-      image: "https://img.fruugo.com/product/1/41/665359411_max.jpg",
-      countInStock: 55,
-      token: "Cute, Premium Brooch",
-      brand: "Balenciaga",
-      rating: {
-        rate: 2,
-        count: 369,
-      },
-    },
-    {
       title: "Galanz Air Conditioner",
       price: 699.99,
       description: "It's a good one!",
@@ -476,21 +462,6 @@ const data = {
       rating: {
         rate: 5,
         count: 6,
-      },
-    },
-    {
-      title: "USB Charger 3.2",
-      price: 6.26,
-      description: "Not-Standard USB Charger",
-      category: "Electronics",
-      image:
-        "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/512SRh4RmXL._AC_UF894,1000_QL80_.jpg",
-      countInStock: 21,
-      token: "USB Charger 3.2",
-      brand: "Samtongue",
-      rating: {
-        rate: 4.7,
-        count: 21,
       },
     },
     {
