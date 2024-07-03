@@ -2,8 +2,16 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Rating from "../components/shared/Rating.jsx";
+import { useContext } from "react";
+import { Store } from "../store.jsx";
+import { addToCartHandler } from "../../utils.js";
 
 const Product = ({ product }) => {
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const {
+    cart: { cartItems },
+  } = state;
+
   return (
     <Card className="product-card">
       <Link to={`/products/${product.token}`}>
@@ -14,9 +22,9 @@ const Product = ({ product }) => {
           alt={product.title}
         />
       </Link>
-
+      <h1>{product.token}</h1>
       <Card.Body className="card-body">
-        <Link to={`/products/${product.id}`}>
+        <Link to={`/products/${product.token}`}>
           <Card.Title>{product.title}</Card.Title>
         </Link>
         <Rating
@@ -29,7 +37,12 @@ const Product = ({ product }) => {
             Out of stock
           </Button>
         ) : (
-          <Button className="btn-primary">Add to cart</Button>
+          <Button
+            className="btn-primary"
+            onClick={() => addToCartHandler(product, cartItems, ctxDispatch)}
+          >
+            Add to cart
+          </Button>
         )}
       </Card.Body>
     </Card>

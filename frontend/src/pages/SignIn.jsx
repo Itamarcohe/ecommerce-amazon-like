@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import Title from "../components/shared/Title.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getError } from "../../utils.js";
 import { toast } from "react-toastify";
+import { Store } from "../store.jsx";
+import { USER_SIGNIN } from "../actions.jsx";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
+  const { dispatch: ctxDispatch } = useContext(Store);
 
   const loginSubmitHandler = async (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const SignIn = () => {
         email,
         password,
       });
+      ctxDispatch({ type: USER_SIGNIN, payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
       console.log(data);
       navigate("/");
@@ -41,7 +44,7 @@ const SignIn = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="email">
+        <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password: </Form.Label>
           <Form.Control
             type="password"
