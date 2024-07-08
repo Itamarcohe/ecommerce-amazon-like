@@ -19,12 +19,6 @@ const getProductById = async (req, res) => {
 };
 
 const getProductByToken = async (req, res) => {
-  // const product = await Product.findOne({ token: req.params.token });
-  // if (product) {
-  //   res.send(product);
-  // } else {
-  //   res.status(404).send({ message: "Product Not found" });
-  // }
   try {
     const product = await Product.findOne({ token: req.params.token });
     if (product) {

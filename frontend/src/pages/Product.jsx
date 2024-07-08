@@ -22,7 +22,6 @@ const Product = ({ product }) => {
           alt={product.title}
         />
       </Link>
-      <h1>{product.token}</h1>
       <Card.Body className="card-body">
         <Link to={`/products/${product.token}`}>
           <Card.Title>{product.title}</Card.Title>

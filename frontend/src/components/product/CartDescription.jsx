@@ -1,7 +1,7 @@
 import { Card, Col, Row, Badge, Button, ListGroup } from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const CartDescription = (product, addToCart) => {
+const CartDescription = ({ product, addToCart }) => {
   return (
     <Card>
       <Card.Body>

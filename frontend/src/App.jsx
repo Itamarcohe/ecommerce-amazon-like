@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import SignUp from "./pages/SignUp.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
+import CartPage from "./pages/CartPage.jsx";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/products/:token" element={<ProductPage />} />
+                <Route path="/cart" element={<CartPage />} />
               </Routes>
             </Container>
           </main>
