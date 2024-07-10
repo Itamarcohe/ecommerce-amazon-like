@@ -9,12 +9,8 @@ const getError = (err) => {
 };
 
 const addToCartHandler = async (product, cartItems, ctxDispatch) => {
-  console.log(product);
-  console.log(cartItems);
   const existedItem = cartItems.find((item) => item._id === product._id);
-  console.log(existedItem);
   const quantity = existedItem ? existedItem.quantity + 1 : 1;
-  console.log(quantity);
   try {
     const { data } = await axios.get(`/api/v1/products/${product._id}`);
     if (data.countInStock < quantity) {

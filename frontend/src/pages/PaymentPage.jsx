@@ -22,6 +22,7 @@ const PaymentPage = () => {
       type: SAVE_PAYMENT_METHOD,
       payload: paymentMethodName,
     });
+    navigate("/placeorder");
   };
   useEffect(() => {
     if (cartItems.length === 0) {

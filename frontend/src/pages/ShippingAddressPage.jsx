@@ -86,6 +86,15 @@ const ShippingAddressPage = () => {
               onChange={(e) => handleInputChange("city", e.target.value)}
             />
           </Form.Group>
+          <Form.Group className="mb-3" controlId="city">
+            <Form.Label>Country: </Form.Label>
+            <Form.Control
+              type="text"
+              required
+              value={enteredValues.country}
+              onChange={(e) => handleInputChange("country", e.target.value)}
+            />
+          </Form.Group>
           <Form.Group className="mb-3" controlId="postalCode">
             <Form.Label>Postal Code: </Form.Label>
             <Form.Control
