@@ -1,0 +1,13 @@
+/* Header.css */
+.navbar-dark .dropdown-menu {
+    right: 0 !important;  /* Ensures the dropdown aligns with the right edge of the parent */
+    left: auto !important; /* Prevents the dropdown from extending past the viewport */
+    transform: translateX(-10%); /* Adjust the transform value as needed */
+}
+
+.navbar-dark .dropdown-menu .dropdown-link {
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: block; /* Ensure the centering works within the dropdown */
+}

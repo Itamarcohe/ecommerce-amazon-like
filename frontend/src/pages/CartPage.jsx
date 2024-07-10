@@ -2,12 +2,13 @@ import { useContext } from "react";
 import { Store } from "../store.jsx";
 import { toast } from "react-toastify";
 import { getError } from "../../utils.js";
-import { ADD_TO_CART, GET_FAILURE } from "../actions.jsx";
+import { ADD_TO_CART, GET_FAILURE, REMOVE_FROM_CART } from "../actions.jsx";
 import Title from "../components/shared/Title.jsx";
 import { Col, Row } from "react-bootstrap";
 import ItemsInCart from "../components/cart/ItemsInCart.jsx";
 import Checkout from "../components/cart/Checkout.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const {
@@ -16,7 +17,10 @@ const CartPage = () => {
     },
     dispatch: ctxDispatch,
   } = useContext(Store);
-
+  const checkOutHandler = () => {
+    navigate("/signin?redirect=/shipping");
+  };
+  const navigate = useNavigate();
   const updateCartHandler = async (item, quantity) => {
     try {
       const { data: product } = await axios.get(`/api/v1/products/${item._id}`);
@@ -30,7 +34,13 @@ const CartPage = () => {
       toast.error(getError(err));
     }
   };
-  console.log(cartItems);
+
+  const removeItemHandler = (item) => {
+    ctxDispatch({
+      type: REMOVE_FROM_CART,
+      payload: item,
+    });
+  };
 
   return (
     <div>
@@ -40,10 +50,11 @@ const CartPage = () => {
           <ItemsInCart
             updateCartHandler={updateCartHandler}
             cartItems={cartItems}
+            removeItemHandler={removeItemHandler}
           />
         </Col>
         <Col md={4}>
-          <Checkout cartItems={cartItems} />
+          <Checkout cartItems={cartItems} checkOutHandler={checkOutHandler} />
         </Col>
       </Row>
     </div>

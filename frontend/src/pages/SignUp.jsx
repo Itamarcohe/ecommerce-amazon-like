@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import Title from "../components/shared/Title.jsx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getError } from "../../utils.js";
 import { toast } from "react-toastify";
@@ -18,11 +18,16 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/";
+
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      navigate(redirect);
     }
-  }, [navigate, userInfo]);
+  }, [navigate, userInfo, redirect]);
 
   const handleInputChange = (identifier, value) => {
     setEnteredValues((prevValues) => ({
@@ -42,7 +47,7 @@ const SignUp = () => {
       });
       ctxDispatch({ type: USER_SIGNIN, payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
-      navigate("/");
+      navigate(redirect);
     } catch (err) {
       toast.error(getError(err));
       console.log(err.message);
@@ -100,7 +105,8 @@ const SignUp = () => {
             "Passwords do not match"}
         </div>
         <div className="mb-3">
-          Already have account? <Link to="/signin">Sign in here</Link>
+          Already have account?{" "}
+          <Link to={`/signin?redirect=${redirect}"`}>Sign in here</Link>
         </div>
         <div className="mb-3">
           Forgot password? <Link to="/forget-password">Reset password</Link>

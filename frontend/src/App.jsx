@@ -14,6 +14,8 @@ import { ToastContainer } from "react-toastify";
 import SignUp from "./pages/SignUp.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import CartPage from "./pages/CartPage.jsx";
+import ShippingAddressPage from "./pages/ShippingAddressPage.jsx";
+import PaymentPage from "./pages/PaymentPage.jsx";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/products/:token" element={<ProductPage />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/shipping" element={<ShippingAddressPage />} />
+                <Route path="/payment" element={<PaymentPage />} />
               </Routes>
             </Container>
           </main>

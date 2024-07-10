@@ -410,7 +410,7 @@ const data = {
         "The Danseuse Étoile choker is timeless and elegant, featuring a gold-finish metal chain and the 'CD' initials. The refined and emblematic necklace can be worn with other styles from the collection for a total look.",
       category: "Jewelery",
       image:
-        "https://media.dior.com/couture/ecommerce/media/catalog/product/n/p/1649195120_N0519DSEMT_D300_E09_GH.jpg",
+        "https://www.nano-jewelry.co.il/wp-content/uploads/2023/04/52-100-102-P1_collage1-1024x1024.jpg",
       countInStock: 9,
       token: "Danseuse Étoile Choker Gold-finish metal | DIOR",
       brand: "DIOR",

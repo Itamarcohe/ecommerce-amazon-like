@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import Title from "../components/shared/Title.jsx";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,12 +7,18 @@ import { getError } from "../../utils.js";
 import { toast } from "react-toastify";
 import { Store } from "../store.jsx";
 import { USER_SIGNIN } from "../actions.jsx";
+import { useLocation } from "react-router-dom";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { dispatch: ctxDispatch } = useContext(Store);
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
+
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/";
 
   const loginSubmitHandler = async (e) => {
     e.preventDefault();
@@ -23,13 +29,17 @@ const SignIn = () => {
       });
       ctxDispatch({ type: USER_SIGNIN, payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
-      console.log(data);
-      navigate("/");
+      navigate(redirect || "/");
     } catch (err) {
       toast.error(getError(err));
       console.log(err.message);
     }
   };
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
 
   return (
     <Container className="small-container">
@@ -56,7 +66,8 @@ const SignIn = () => {
           <Button type="submit">Sign-in</Button>
         </div>
         <div className="mb-3">
-          New Customer? <Link to="/signup">Create new account</Link>
+          New Customer?{" "}
+          <Link to={`/signup?redirect=${redirect}`}>Create new account</Link>
         </div>
         <div className="mb-3">
           Forgot password? <Link to="/forget-password">Reset password</Link>

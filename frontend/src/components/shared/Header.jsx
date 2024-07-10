@@ -1,9 +1,9 @@
+import "./Header.css"; // Import the custom CSS file
 import { Navbar, NavDropdown, Container, Badge } from "react-bootstrap";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import SearchBox from "./SearchBox.jsx";
 import { Store } from "../../store.jsx";
 import { useContext } from "react";
-import { LinkContainer } from "react-router-bootstrap";
 import { USER_SIGNOUT } from "../../actions.jsx";
 
 const Header = () => {
@@ -11,10 +11,7 @@ const Header = () => {
   const { userInfo, cart } = state;
   const { cartItems } = cart; // Correctly destructure cartItems from cart object
   const navigate = useNavigate();
-
-  {
-    console.log(`line 43 - cartItems ${cartItems.length} items`);
-  }
+  const location = useLocation();
 
   const signoutHandler = () => {
     ctxDispatch({ type: USER_SIGNOUT });
@@ -28,6 +25,11 @@ const Header = () => {
     <header>
       <Navbar bg="dark" variant="dark">
         <Container>
+          <Link onClick={() => navigate(-1)}>
+            {location.pathname !== "/" && (
+              <i className="fa fa-arrow-left text-white align-arrow-right"></i>
+            )}
+          </Link>
           <Link to="/">
             <Navbar.Brand>
               <img
@@ -37,7 +39,6 @@ const Header = () => {
               />
             </Navbar.Brand>{" "}
           </Link>
-          {/*<SearchBox />*/}
           <SearchBox />
           <nav className="d-flex align-items-center justify-content-end me-2 ms-4">
             <Link to="/cart" className="nav-link me-2">
@@ -56,22 +57,17 @@ const Header = () => {
               title={userInfo.name}
               id="basic-nav-dropdown"
             >
-              <Link to="/profile" style={{ textDecoration: "none" }}>
-                <NavDropdown.Item>User Profile</NavDropdown.Item>
+              <Link to="/profile" className="dropdown-link">
+                User Profile
               </Link>
-              <Link to="/orderhistory" style={{ textDecoration: "none" }}>
-                <NavDropdown.Item>Order History</NavDropdown.Item>
+              <Link to="/orderhistory" className="dropdown-link">
+                Order History
               </Link>
               <NavDropdown.Divider />
               <Link
                 to="#signout"
                 onClick={signoutHandler}
-                style={{
-                  color: "black",
-                  textAlign: "center",
-                  textDecoration: "none",
-                  display: "block", // To ensure the centering works within dropdown
-                }}
+                className="dropdown-link"
               >
                 Sign Out
               </Link>
@@ -82,36 +78,15 @@ const Header = () => {
               id="basic-nav-dropdown"
               title=""
             >
-              {/*<Link className="nav-link text-white ms-2" to="/signin">*/}
-              {/*  <NavDropdown.Item>Sign in</NavDropdown.Item>*/}
-              {/*</Link>*/}
-
               <Link
                 to="/signin"
                 onClick={signoutHandler}
-                style={{
-                  color: "black",
-                  textAlign: "center",
-                  textDecoration: "none",
-                  display: "block", // To ensure the centering works within dropdown
-                }}
+                className="dropdown-link"
               >
                 Sign in
               </Link>
-
               <NavDropdown.Divider />
-              {/*<Link className="nav-link text-white" to="/signup">*/}
-              {/*  <NavDropdown.Item>Sign Up</NavDropdown.Item>*/}
-              {/*</Link>*/}
-              <Link
-                to="/signup"
-                style={{
-                  color: "black",
-                  textAlign: "center",
-                  textDecoration: "none",
-                  display: "block", // To ensure the centering works within dropdown
-                }}
-              >
+              <Link to="/signup" className="dropdown-link">
                 Sign up
               </Link>
             </NavDropdown>
